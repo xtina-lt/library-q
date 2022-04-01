@@ -59,16 +59,9 @@ def project_create():
             cat_list.append({'project_id':data['id'], 'category_id': result})
         for i in cat_list:
             Project.insert_cat_proj(i)
-    return redirect("/projects/pyfetch")
+    return redirect("/projects/fetch")
 
 
-'''ATTEMPT AJAX'''
-@app.route("/projects/ajax")
-def select_projects_ajax():
-    return render_template("/projects_ajax.html")
 
-@app.route("/projects/jsonify")
-def projects_json():
-    return jsonify(Project.select_all_json())
 
 
