@@ -4,6 +4,12 @@ from flask_app import app
 from flask_app.models.project import Project
 from flask_app.models.like import Like
 
+''''READ PROJECTS'''
+@app.route("/projects")
+def select_all_projects():
+    results = Project.select_all()
+    return render_template("/projects.html", output = results)
+
 '''CREATE PROJECT'''
 @app.route("/projects/fetch")
 def select_projects_py():
@@ -54,13 +60,6 @@ def project_create():
         for i in cat_list:
             Project.insert_cat_proj(i)
     return redirect("/projects/pyfetch")
-
-
-''''READ PROJECTS'''
-@app.route("/projects")
-def select_all_projects():
-    results = Project.select_all()
-    return render_template("/projects.html", output = results)
 
 
 '''ATTEMPT AJAX'''
