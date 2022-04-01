@@ -1,0 +1,76 @@
+{%extends 'base_cols.html'%}
+{%block header%}
+register or login
+{%endblock%}
+{%block main%}
+<div>
+    <div>
+        <h2>
+            Register
+        </h2>
+        {% with messages = get_flashed_messages(category_filter=["register"]) %}
+        {% if messages %}
+            {% for i in messages %}
+                <p>{{i}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form  action="/register/process" method="post">
+            <!-- first name -->
+            <label for="first_name">
+                First Name:
+            </label>
+            <input type="text" name="first_name" required>
+            <!-- last name -->
+            <label for="last_name">
+                Last Name:
+            </label>
+            <input type="text" name="last_name" required>
+            <!-- email -->
+            <label for="email">
+                Email:
+            </label>
+            <input type="text" name="email" required>
+            <!-- check email -->
+            <label for="check_email">
+                Check Email:
+            </label>
+            <input type="text" name="check_email" required>
+            <!-- password -->
+            <label>
+                Password:
+            </label>
+            <input type="password" name="password" required>
+            <!-- check password -->
+            <label>
+                Check Password:
+            </label>
+            <input type="password" name="check_pword" required>
+            <!-- submit -->
+            <input type="submit" value="Come On In....">
+        </form>
+    </div>
+</div>
+
+<div>
+    <div>
+        <h2>
+            Login
+        </h2>
+        {% with messages = get_flashed_messages(category_filter=["login"]) %}
+        {% if messages %}
+            {% for i in messages %}
+                <p>{{i}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="/login/process" method="post">
+            <label for="email">Email:</label>
+            <input type="text" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+{%endblock%}

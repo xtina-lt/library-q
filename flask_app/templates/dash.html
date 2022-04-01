@@ -1,0 +1,393 @@
+{%extends 'base_cols.html'%}    
+{%block header%}
+    {{user.first_name}}
+{%endblock%}
+{%block main%}
+<!-- ###### -->
+<!-- LEFT -->
+<!-- ###### -->
+<div class="left_side">
+    <div id="recieved_messages">
+        <h2>
+            Recieved 
+            {%if recieved%}
+                {{recieved | count}}
+            {%endif%}
+        </h2>
+        <!-- ################################################## -->
+        <!-- #############    recieved messages    ############ -->
+        <!-- ################################################## -->
+        {%if recieved%}
+        {%for i in recieved%}
+        <div class="message">
+            <div class="message_options">
+                <h3>
+                    From: 
+                    {{i.sender.first_name|title}}
+                </h3>
+                {{i.content}}
+                <br>
+                <!-- time -->
+                {%if i.created_at != i.updated_at%}
+                    {{i.updated_at}}
+                {%else%}
+                    {{i.created_at}}
+                {%endif%}
+                <!-- like -->
+                <form class="like_form" method="POST">
+                    <input type="hidden" name="like_id" value={{i.like_id}}>
+                    <input type="submit" class="small_submit like_count" value="🤍{{likes[i.like_id].count}}">
+                </form>
+            </div> <!-- endmessageoptions -->
+            <!-- if recieved can't update -->
+            {% if i.has_replies%}
+            {%for j in i.has_replies%}
+            <div class="reply">
+                <span class="content">
+                    {{j.content}}
+                </span>
+                <br>
+                {{j.user['first_name']}} 
+                {%if j.created_at != j.updated_at%}
+                {{j.updated_at}}
+                {%else%}
+                {{j.created_at}}
+                {%endif%}
+                <br>
+                {%if j.user['id'] == session['logged_in']['id']%}
+                <a class="reply_update_a" href="">
+                    Edit
+                </a>
+                <a href="/reply/{{j.id}}/{{j.like.id}}/delete">
+                    Delete
+                </a>
+                {%endif%}
+                <form class="like_form" method="POST">
+                    <input type="hidden" name="like_id" value={{j.like.id}}>
+                    <input type="submit" class="small_submit like_count" value="🤍 {{likes[j.like.id].count}}">
+                </form>
+            </div><!--endreply--> 
+            <form class="reply_update_form" style="display:none">
+                <textarea rows ="4" cols="10" name="content" required>{{j.content}}</textarea>
+                <input type="hidden" name="reply_id" value="{{j.id}}">
+                <input type="submit" value="Change Me">
+            </form>                 
+            {%endfor%} <!--endforreplies-->
+            {%endif%} <!--endifreplies-->
+        </div> <!--end of message-->
+        <form action="/reply/create" method="POST">
+            <textarea rows ="2" cols="10" name="content" required>Talk to me...</textarea>
+            <input type="hidden" name="user_id" value="{{session['logged_in']['id']}}">
+            <input type="hidden" name="message_id" value="{{i.id}}">
+            <input type="submit" value="Reply">
+        </form>
+        {%endfor%}
+        {%else%}
+            <img class="logo" src="{{ url_for('static', filename='logo-black.png') }}">
+            <br>
+            Incase nobody told you today...
+            <br>
+            You are awesome!
+        {%endif%} <!--if recieved-->
+    </div>
+    <div id="sent_messages">
+        <h2>
+            Sent 
+            {%if sent%}
+                {{sent | count}}
+            {%endif%}
+        </h2>
+        {%if sent%}
+        {%for i in sent%}
+        <!-- ################################################## -->
+        <!-- ##############     sent messages    ############## -->
+        <!-- ################################################## -->
+        <div class="message">
+            <h3>
+                To: 
+                {{i.reciever.first_name|title}}
+            </h3>
+            <div class="message_options">
+                <span class="content">
+                    {{i.content}}
+                </span>
+                <br>
+                <!-- time -->
+                {%if i.created_at != i.updated_at%}
+                    {{i.updated_at}}
+                {%else%}
+                    {{i.created_at}}
+                {%endif%}
+                <!-- like -->
+                <form class="like_form" method="POST">
+                    <input type="hidden" name="like_id" value={{i.like_id}}>
+                    <input type="submit" class="small_submit like_count" value="🤍{{likes[i.like_id].count}}">
+                </form>
+                <!-- sender is user author, can edit -->
+                <a class="message_update_a" href="">
+                    Edit
+                </a>
+                <a href="/message/{{i.id}}/{{i.like_id}}/delete">
+                    Delete
+                </a>
+            </div>
+            <form class="messsage_update_form" style="display:none" method="POST">
+                <textarea cols="4" rows="2" name="content">{{i.content}}</textarea>
+                <input type="hidden" name="id" value="{{i.id}}">
+                <input type="submit" value="change me">
+            </form>
+            {% if i.has_replies%}
+            {%for j in i.has_replies%}
+            <div class="reply">
+                <span class="content">
+                    {{j.content}}
+                </span>
+                <br>
+                {{j.user['first_name']}} 
+                {%if j.created_at != j.updated_at%}
+                {{j.updated_at}}
+                {%else%}
+                {{j.created_at}}
+                {%endif%}
+                <br>
+                {%if j.user['id'] == session['logged_in']['id']%}
+                <a class="reply_update_a" href="">
+                    Edit
+                </a>
+                <a href="/reply/{{j.id}}/{{j.like.id}}/delete">
+                    Delete
+                </a>
+                {%endif%}
+                <form class="like_form" method="POST">
+                    <input type="hidden" name="like_id" value={{j.like.id}}>
+                    <input type="submit" class="small_submit like_count" value="🤍 {{likes[j.like.id].count}}">
+                </form>
+            </div><!--endreply--> 
+            <form class="reply_update_form" style="display:none">
+                <textarea rows ="4" cols="10" name="content" required>{{j.content}}</textarea>
+                <input type="hidden" name="reply_id" value="{{j.id}}">
+                <input type="submit" value="Change Me">
+            </form>                 
+            {%endfor%} <!--endforreplies-->
+            {%endif%} <!--endifreplies-->
+        </div> <!--endmessage-->
+        <form action="/reply/create" method="POST">
+            <textarea rows ="2" cols="10" name="content" required>Talk to me...</textarea>
+            <input type="hidden" name="user_id" value="{{session['logged_in']['id']}}">
+            <input type="hidden" name="message_id" value="{{i.id}}">
+            <input type="submit" value="Reply">
+        </form>
+        {%endfor%}
+        {%else%}
+            <img class="logo" src="{{ url_for('static', filename='logo-black.png') }}">
+            <br>
+            Send 💜 to get 💜.
+        {%endif%} <!--endifrecieved-->
+    </div>            
+    <!-- ################################################## -->
+    <!-- ##############     create message    ############# -->
+    <!-- ################################################## -->
+    <div class="create_message">
+        {%if not admin%} <!--if not admin only message christina-->
+            <!-- ######### CREATE MESSAGE ######### -->
+            <h3>
+                Messge Christina
+            </h3>
+            <!-- ######### CREATE MESSAGE ######### -->
+            <form action="/message/create" method="POST">
+                <textarea rows ="4" cols="10" name="content" required>Talk to me...</textarea>
+                <input type="hidden" name="sender_id" value="{{session['logged_in']['id']}}">
+                <!-- session id is sender -->
+                <input type="hidden" name="reciever_id" value="1">
+                <!-- reciever can only be xtina id : 1 -->
+                <input type="submit" value="Kudos!">
+            </form>
+        {%else%} <!--if admin can message all users-->
+            <h2>
+                Message Peeps
+            </h2>
+            {%for i in users%}
+            {%if i.id != 1%}
+            <h3>
+                {{i.last_name|title}}, {{i.first_name|title}}
+            </h3>
+            <form action="/message/create" method="POST">
+                <textarea rows ="4" cols="10" name="content" required>Talk to me...</textarea>
+                <input type="hidden" name="sender_id" value="{{session['logged_in']['id']}}">
+                <!-- session id is sender -->
+                <input type="hidden" name="reciever_id" value="{{i.id}}">
+                <!-- reciever can only be xtina id : 1 -->
+                <input type="submit" value="Kudos!">
+            </form>
+            {%endif%}
+            {%endfor%}
+        {%endif%}
+    </div>
+    <div class="user_info">
+        <h2>
+            Your Information
+        </h2>
+        <table>
+            <th>
+                Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Stars
+            </th>
+            <tr>
+                <td>
+                    {{user.last_name|title}}, {{user.first_name|title}}
+                </td>
+                <td>
+                    {{user.email}}
+                </td>
+                <td>
+                    {{user.stars}}
+                </td>
+            </tr>
+        </table>
+        <a href="/user/update">Update</a>
+    </div>
+</div> <!--endleft-->
+
+<!-- ###### -->
+<!-- RIGHT -->
+<!-- ###### -->
+<div class="right_side">
+    <!-- ################################################## -->
+    <!-- ##############     gifshop products    ########### -->
+    <!-- ################################################## -->
+    {%if not products and admin%}
+    <!--don't display a div-->
+    {%elif products%}
+    <div>
+        <h2>
+            Sparkle to Your Day:
+        </h2>
+        {%for i in products%}
+        <div>
+            <h3>
+                {{i.name}}
+            </h3>
+            <a href="{{i.like.url}}">
+                <img class="logo" src="{{ url_for('static', filename=i.url) }}">
+            </a>
+        </div>
+        {%endfor%}
+    </div>
+    {%else%}
+    <div>
+        <h2>
+            Sparkle to Your Day:
+        </h2>
+        <img class="logo" src="{{ url_for('static', filename='logo-black.png') }}">
+        <br>
+        🤍 things.
+        <br>
+        Obtain things at GifShop.
+        <br>
+        Repeat 🤍
+    </div>
+    {%endif%}
+    <!-- ################################################## -->
+    <!-- ###################     LIKES    ################# -->
+    <!-- ################################################## -->
+    {%if not admin%} <!--#### IF NOT ADMIN : SHOW USER SITE INFORMATION ####-->
+    <div class="user_likes">
+        <h2>
+            Likes
+        </h2>
+        {%if user_likes%}
+            <table>
+                <th>
+                    Desc
+                </th>
+                <th>
+                    Remove
+                </th>
+                {% for i in user_likes %}
+                <tr>
+                    <td>
+                        <a href="{{i.url}}">
+                            {{i['description']}}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/user_like/{{i['id']}}/delete">
+                            Unlike
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {%else%}
+            <img class="logo" src="{{ url_for('static', filename='logo-black.png') }}">
+            <br>
+            Like things for points!
+        {%endif%}
+    </div> 
+    {%else%} <!--#### IF ADMIN : SHOW CREATE AND ALL LIKES ####-->
+    <div class="create_like">
+        <h2>
+            Create Like
+        </h2>
+        <form action="/like/create/process" method="POST">
+            <!-- description -->
+            <label for="description">
+                Description
+            </label>
+            <input type="text" name="description">
+            <!-- url -->
+            <label for="url">
+                URL:
+            </label>
+            <input type="text" name="url">
+            <!-- submit -->
+            <input type="submit" value="Create Like">
+        </form>
+    </div>
+    <div class="read_all_likes">
+        <h2>
+            Likes
+        </h2>
+        <table>
+            <th>
+                ID
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Url
+            </th>
+            <th>
+                Likes
+            </th>
+            {%for i in likes.values()%}
+            <tr>
+                <td>
+                    {{i.id}}
+                </td>
+                <td>
+                    {{i.description}}
+                </td>
+                <td>
+                    {{i.url}}
+                </td>
+                <td>
+                    {%if i.count%}
+                        {{i.count}}
+                    {%else%}
+                        0
+                    {%endif%}
+                </td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    {%endif%}
+</div> <!--endright-->
+{%endblock%}

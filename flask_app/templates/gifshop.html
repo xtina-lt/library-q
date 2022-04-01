@@ -1,0 +1,84 @@
+{%extends 'base_side.html'%}
+{%block header%}
+GIFSHOP
+{%endblock%}
+{%block main%}
+<!-- flashed messages -->
+{%with messages=get_flashed_messages()%}
+    {%if messages%}
+    <div>
+    {%for i in messages%}
+        {{i}}
+        <br>
+    {%endfor%}
+    </div>
+    {%endif%}
+{%endwith%}
+
+<!-- show products -->
+{%for i in output%}
+<div>
+    <h2>
+        {{i.name}}
+    </h2>
+    <form class="like_form" method="POST">
+        <input type="hidden" name="like_id" value={{i.like.id}}>
+        <input type="submit" class="small_submit like_count" value="🤍{{i.like.count}}">
+    </form>
+    <img class="logo"  src="{{ url_for('static', filename=i.url) }}">
+    <table>
+        <th>
+            Description
+        </th>
+        <th>
+            🤍
+        </th>
+        <tr>
+            <td>
+                {{i.description}}
+            </td>
+            <td>
+                {{i.stars}}
+            </td>
+        </tr>
+    </table>
+    <form action="/user_products/create" method="POST">
+        <input type="hidden" name="user_id" value="{{session['logged_in']['id']}}">
+        <input type="hidden" name="product_id" value="{{i.id}}">
+        <input type="hidden" name="cost" value="{{i.stars}}">
+        <input type="submit" class="small_submit" value="Acquire">
+    </form>
+</div>
+{%endfor%}
+
+<!-- ##### -->
+<!-- ADMIN -->
+<!-- ##### -->
+{%if session["logged_in"]["id"]==1%}
+    <div>
+    <!-- CREATE -->
+        <h2>
+            Create Product
+        </h2>
+        <form action="/product/create" method="POST">
+            <label for="name">
+                Name:
+            </label>
+            <input type="text" name="name" required>
+            <label for="description">
+                Description
+            </label>
+            <input type="text" name="description" required>
+            <label for="stars">
+                Cost:
+            </label>
+            <input type="number" name="stars" required>
+            <label for="url">
+                URL:
+            </label>
+            <input type="text" name="url" required>
+            <input type="submit" value="add some sparkle..">
+        </form>
+    </div>
+{%endif%}
+{%endblock%}

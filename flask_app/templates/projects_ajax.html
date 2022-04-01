@@ -1,0 +1,71 @@
+{%extends 'base_side.html'%}
+{%block header%} TEST {%endblock%}
+{%block main%}
+<div>
+    <a id="read_xtina">
+        Xtina
+    </a>
+    <br>
+    <a id="read_git" href="">
+        Github Projects
+    </a>
+</div>
+
+<div id="show_git" style="display:none">
+<table id="new_git">
+    <th>
+        ID 
+    </th>
+    <th>
+        Name
+    </th>
+    <th>
+        Language
+    </th>
+    <th>
+        Description
+    </th>
+    <th>
+        Topics
+    </th>
+    <th>
+        Git Url
+    </th>
+    <th>
+        Page Url
+    </th>
+    <th>
+        Submit
+    </th>
+    <tr>
+        <td>
+            <form class="process_new_project">
+            <input type="text" name="id">
+        </td>
+        <td>
+            <input type="text" name="name">
+        </td>
+        <td>
+            <input type="text" name="language">
+        </td>
+        <td>
+            <textarea name="description">Description</textarea>
+        </td>
+        <td>
+            <textarea name="categories">Topics</textarea>
+        </td>
+        <td>
+            <input type="text" name="git">
+        </td>
+        <td>
+            <input type="text" name="url">
+        </td>
+        <td>
+            <input type="submit" value="Create!">
+            </td>
+            </form>
+        </td>
+    </tr>
+</table>
+</div>
+{%endblock%}

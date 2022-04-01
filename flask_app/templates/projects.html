@@ -1,0 +1,31 @@
+{%extends 'base_side.html'%}
+{%block header%} Projects {%endblock%}
+{%block main%}
+{%for i in output%}
+{%if i.name != "test" %}
+<div>
+    <span style="display: none">{{i.id}}</span>
+    <h2>
+        <a href="{{i.path}}">{{i.name}}</a>
+    </h2>
+    <br>
+    Descirption: {{i.description}}
+    <br>
+    {%if i.categories != "NULL" %}
+    Topics: {{i.categories}}
+    <br>
+    {%endif%}
+    <a href="{{i.git}}" target="#">GitHub</a>
+    {%if i.url != "null"%}
+    <br>
+    <a href="{{i.url}}" target="#">Interactive Site</a>
+    <br>
+    {%endif%}
+    <form class="like_form"  method="POST">
+        <input type="hidden" name="like_id" value="{{i.like['id']}}">
+        <input type="submit" class="small_submit like_count" value="🤍 {{i.like['count']}}">
+    </form>
+</div>
+{% endif %}
+{%endfor%}
+{%endblock%}

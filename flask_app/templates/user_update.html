@@ -1,0 +1,52 @@
+{%extends 'base_side.html'%}
+{%block header%}
+Update {{user.first_name}}
+{%endblock%}
+{%block main%}
+<div>
+    <h2>
+        Change Information
+    </h2>
+    <form action="/user/update/process" method="POST">
+        <!-- id -->
+        <input type="hidden" name="id" value="{{user.id}}">
+        <!-- first name -->
+        <label for="first_name">
+            First Name:
+        </label>
+        <input type="text" name="first_name" value="{{user.first_name}}">
+        <!-- last name -->
+        <label for="last_name">
+            Last Name
+        </label>
+        <input type="text" name="last_name" value="{{user.last_name}}">
+        <!-- email -->
+        <label for="email">
+            Email:
+        </label>
+        <input type="text" name="email" value="{{user.email}}">
+        <!-- email -->
+        <label for="email">
+            Confirm Email:
+        </label>
+        <input type="text" name="confirm_email" value="{{user.email}}">
+        <!-- password -->
+        <label for="">
+            Password*:
+        </label>
+        <input type="password" name="password">
+        <!-- password -->
+        <label for="">
+            New Password:
+        </label>
+        <input type="password" name="new_pass">
+        <!-- confirm Password -->
+        <label for="">
+            Confirm Password:
+        </label>
+        <input type="password" name="new_pass_check">
+        <!-- submit -->
+        <input type="submit" value="Change Me..">
+    </form>
+</div>
+{%endblock%}

@@ -1,0 +1,92 @@
+{%extends 'base_side.html'%}
+{%block header%} PYFETCH {%endblock%}
+{%block main%}
+<div id="show_git">
+    <table id="new_git">
+        <th>
+            ID 
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Language
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Topics
+        </th>
+        <th>
+            Git Url
+        </th>
+        <th>
+            Page Url
+        </th>
+        <th>
+            Submit
+        </th>
+        <tr>
+            <td>
+                <form class="new_project" action="/project/create" method="post">
+                <input type="text" name="id">
+            </td>
+            <td>
+                <input type="text" name="name">
+            </td>
+            <td>
+                <input type="text" name="language">
+            </td>
+            <td>
+                <textarea name="description">Description</textarea>
+            </td>
+            <td>
+                <textarea name="categories">Topics</textarea>
+            </td>
+            <td>
+                <input type="text" name="git">
+            </td>
+            <td>
+                <input type="text" name="url">
+            </td>
+            <td>
+                <input type="submit" value="Create!">
+                </td>
+                </form>
+            </td>
+        </tr>
+        {%for i in output%}
+        <tr>
+            <td>
+                <form class="new_project" action="/project/create" method="post">
+                <input type="text" name="id" value="{{i['id']}}">
+            </td>
+            <td>
+                <input type="text" name="name" value="{{i['name']}}">
+            </td>
+            <td>
+                <input type="text" name="language" value="{{i['language']}}">
+            </td>
+            <td>
+                <textarea name="description">{{i['description']}}</textarea>
+            </td>
+            <td>
+                <textarea name="categories">{{i['categories']}}</textarea>
+            </td>
+            <td>
+                <input type="text" name="git" value="{{i['git']}}">
+            </td>
+            <td>
+                <input type="text" name="url" value="{%if i['url']%}{{i['url']}}{%else%}null{%endif%}">
+            </td>
+            <td>
+                <input type="submit" value="Create!">
+                </td>
+                </form>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+</div>
+{%endblock%}

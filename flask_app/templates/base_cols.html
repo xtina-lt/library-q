@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦄XTINA.CODES👩‍💻</title>
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Codystar&family=Barlow+Condensed&family=Lobster&display=swap" rel="stylesheet">
+    <!-- STATIC FILES -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_cols.css') }}">
+    <!-- <img src="{{ url_for('static', filename='my_img.png') }}"> -->
+    <script type="text/javascript" defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <header>
+        <h1 class="accent">
+        {%block header%}
+        {%endblock%}
+        </h1>
+    </header>
+    <nav>
+        <a href="/">
+            Home
+        </a>
+        <a href="/projects">
+            Projects
+        </a>
+        <a href="/gifshop">
+            GifShop
+        </a>
+        {%if session["logged_in"]%}
+        <a href="/dashboard">
+            Dashboard
+        </a>
+        <span id="stars">
+            💜{{session["logged_in"]["stars"]}}
+        </span>
+        <a href="/logout">
+            Logout
+        </a>
+        {%else%}
+        <a href="/login">
+            Login
+        </a>
+        {% endif %}
+    </nav>
+    <main>
+        {%block main%}
+        {%endblock%}
+    </main>
+    <footer>
+        &copy; Copyright. All Rights Reserved.
+    </footer>
+</body>
+</html>

@@ -1,0 +1,201 @@
+{%extends 'base_side.html'%}
+{%block header%}
+XTINA.CODES
+{%endblock%}
+{%block main%}
+<h2>
+    Lets Talk Coding
+</h2>
+<div>
+    <h3>
+        Languages
+    </h3>
+    <table>
+        <tr>
+            <th>Front-End</th>
+            <th>Python</th>
+            <th>JavaScript</th>
+            <th>Database</th>
+            <th>Concpts</th>
+        </tr>
+        <tr>
+            <td>HTML5</td>
+            <td>Django</td>
+            <td>Express</td>
+            <td>MySQL</td>
+            <td>AJAX</td>
+        </tr>
+        <tr>
+            <td>CSS3</td>
+            <td>Flask</td>
+            <td>Mongoose</td>
+            <td>MongoDB</td>
+            <td>OOP</td>
+        </tr>
+        <tr>
+            <td>Bootstrap</td>
+            <td>Unitest</td>
+            <td>React</td>
+            <td></td>
+            <td>REST</td>
+        </tr>
+    </table>
+</div>
+
+<h3>
+    Full Stack Developer
+</h3>
+    <div>
+        <b>A full stack developer is someone who can develop both client and server applications as well as database creation/manipulation</b>. 
+        Full stack is defined as the collection of a series of technologies needed to complete software. 
+        Being able to create a prototype and read code in different languages allows for versitility in any project. 
+        Learning the basics in many languages enhances a larger picture to be taken from complex problems. 
+        This is beneficial for unique solutions with a greater over all control of the product.
+        <form class="like_form" method="POST">
+            <input type="hidden" name="like_id" value=1>
+            <input type="submit" class="small_submit like_count" value="🤍 {{likes[1].count}}">
+        </form>
+    </div>
+<h3>
+    Request Response Cycle
+</h3>
+    <div>
+        Client computers and other internet-connected devices <b>request</b> access to a web page. 
+        This can be done by inputing URL, clicking links, submitting forms, or refreshing. 
+        Client devices talk to servers that store web pages or applications. 
+        Then, the application's servers interpret what information is neccessary, sometimes this is done with routing. 
+        Finally the application's server sends the data back to the client. This is said to be the <b>response</b>.
+        <form class="like_form" method="POST">
+            <input type="hidden" name="like_id" value=2>
+            <input type="submit" class="small_submit like_count" value="🤍 {{likes[2].count}}">
+        </form>
+    </div>
+    
+
+<h3>
+    Front-End
+</h3>
+    <div>
+        Front-end developement focuses on what the client sees and interacts with directly, also known as client-side developement. 
+        <b>User interface(UI)</b> access points are where client can interact with designs and determine what each part of the application does.
+        Ensuring dynamic readability between cross-browsers, cross-platforms (operating systems), and cross-devices is pertinent to <b>front-end development</b>.
+        <br>
+        <br>
+        Examples: <b>Hypertext Markup Language(HTML)</b>, <b>Cascading Style Sheets(CSS)</b>, and <b>JavaScript(JS)</b> frameworks.
+        <form class="like_form" method="POST">
+            <input type="hidden" name="like_id" value=3>
+            <input type="submit" class="small_submit like_count" value="🤍 {{likes[3].count}}">
+        </form>
+    </div>
+
+<h3>
+    Back-End
+</h3>
+    <div> 
+        Back end development creates the server side application processing algorithms. 
+        This deals more with the <b>response</b> portion of the Request-Response Cycle. 
+        This is also where connection to <i>database(s)</i> is/are initiated. 
+        <i>Routes</i> are made to tell servers what information needs to be processed. 
+        The <b>execution phase</b> verifies requests, and completes complex algorithms to manipulates data. Finally this data is sent back as a <b>response</b>. 
+        Back-end development acts as a middle man for communication between the client and database.
+        <br>
+        <br>
+        <b>Examples: Python, Java, Ruby, and C#.</b>
+        <form class="like_form" method="POST">
+            <input type="hidden" name="like_id" value=4>
+            <input type="submit" class="small_submit like_count" value="🤍 {{likes[4].count}}">
+        </form>
+    </div>
+
+<h3>
+    Database
+</h3>
+    <div>
+        Databese developement deals with <b>Structured Query Language(SQL)</b>. 
+        SQL is a standardized programming lanuage that is used to manage <b>relational databases</b> and perform various operations within them.
+        In this development we create, manipulate, and save data into databases. 
+        <b>Databases</b> are a collection of organized information that can be easily accessesd, managed, and updated. 
+        Understanding of <b>Entity Relationship Diagrams(ERD's)</b> is fundamental to organize data and minimize repitition while creating visual planes of how the database looks and behaves. 
+        Differentiating <i>Many-to-Many, Many-to-One, and One-to-Many relationships</i>, and seperating for <b>normalization</b> is fundamental. 
+        The basics are being able to destinguish the differnt datatypes, naming conventions, and <b>CRUD(Create, Read, Update, Delete)</b> quieries.
+        <br>
+        <br>
+        <b>Examples: SQL, MySQL, MangoDB.</b>
+        <form class="like_form" method="POST">
+            <input type="hidden" name="like_id" value=5>
+            <input type="submit" class="small_submit like_count" value="🤍 {{likes[5].count}}">
+        </form>
+    </div>
+
+<h3>
+    Object-Oriented Programming(OOP)
+</h3>
+    <div>
+        Object-Oriented Programming is a process that involves analyzing and designing our application from an <b>object oriented</b> point of view. 
+        Everything in the world is an object. 
+        Objects have properties and behaviors which can be translated into a language that the computer can understand. 
+        We use <b>objects</b> and <b>classes</b> to represent real world objects. 
+        <b>Variables</b> and <b>attributes</b> are created for things hat real world objects <b>have</b>. 
+        <b>Methods</b> and <b>functions</b> are created to represent real world objects' <b>behaviors</b>. 
+        Complex planning and implimentation is neccessary to execute this type of programming.
+        <form class="like_form" method="POST">
+            <input type="hidden" name="like_id" value=6>
+            <input type="submit" class="small_submit like_count" value="🤍 {{likes[6].count}}">
+        </form>
+    </div>
+
+<h3>
+    Procedural Programming
+</h3>
+    <div>
+        Procedural execution is completed by both the developer and the computer. 
+        The computer reads from top to bottom. 
+        This is how we write out our code. 
+        This is sequential.
+        <form class="like_form" method="POST">
+            <input type="hidden" name="like_id" value=7>
+            <input type="submit" class="small_submit like_count" value="🤍 {{likes[7].count}}">
+        </form>
+    </div>
+
+<h3>
+    Model-View-Controller(M.V.C.) Programming
+</h3>
+    <div>
+        <b>MVC</b> programming is <b>OOP</b> with more structure by definition of files. 
+        First, <b>models</b> are created to talk to the database and represent an object. 
+        Functions that adhere to each object are written in these files. 
+        Then, <b>controllers</b> are files that have routes and direct the server to get information from <b>models</b> or load views. 
+        This tells where to go and what information to grab. 
+        Finally, <b>views</b> are files that the client sees directly. An example of this is HTML that places things on a webpage. <b>Jinja</b> is a great templating engine to use alongside Python.
+        <form class="like_form" method="POST">
+            <input type="hidden" name="like_id" value=8>
+            <input type="submit" class="small_submit like_count" value="🤍 {{likes[8].count}}">
+        </form>
+    </div>
+
+<h3>
+    Object Relational Mapping(ORM)
+</h3>
+    <div>
+        <b>ORM</b> is a tequnique that uses <b>OOP</b> to <b>query and manipulate database data</b>. 
+        Here we <b>map data</b> to be shown. 
+        This can be done by creating data <b>dictionaries</b>. 
+        Encapsulation of <b>SQL quieries</b> and hiding them in objects is how this is completed.
+        <b>ORM</b>, essentially, connects an object in memory to a <b>relational database</b>. 
+        <form class="like_form" method="POST">
+            <input type="hidden" name="like_id" value=9>
+            <input type="submit" class="small_submit like_count" value="🤍 {{likes[9].count}}">
+        </form>
+    </div>
+<div>
+    Incase nobody told you today...
+    <br>YOU ARE AWESOME!!</br>
+    <img class="logo"  src="{{ url_for('static', filename='logo-black.png') }}">
+    <br>
+    <a href="https://github.com/xtina-lt" target="#">
+        Check out my work!
+    </a>
+</div>
+
+{%endblock%}
