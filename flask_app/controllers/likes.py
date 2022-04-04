@@ -50,17 +50,20 @@ def delete_user_like(id):
 @app.route("/like/form", methods=["POST"])
 def test_Form():
     if session:
-        data={
-            "like_id" : request.form["like_id"],
-            "user_id": session['logged_in']['id']
-        }
-        if Like.validate_insert(data):
-            Like.insert_like_user(data)
-            new_stars=User.get_stars({"id" : session["logged_in"]["id"]})
-            session["logged_in"] = new_stars
-            like=Like.select_one({"id": request.form["like_id"]})
-            return jsonify(stars = session["logged_in"]["stars"], num=like.count)
+        if session["logged_in"]:
+            data={
+                "like_id" : request.form["like_id"],
+                "user_id": session['logged_in']['id']
+            }
+            if Like.validate_insert(data):
+                Like.insert_like_user(data)
+                new_stars=User.get_stars({"id" : session["logged_in"]["id"]})
+                session["logged_in"] = new_stars
+                like=Like.select_one({"id": request.form["like_id"]})
+                return jsonify(stars = session["logged_in"]["stars"], num=like.count)
+            else:
+                return jsonify(message="not logged in")
         else:
-            return jsonify(message="not logged in")
+            redirect("/login")
     else:
-        return jsonify(message="not logged in")
+        return redirect("/login")

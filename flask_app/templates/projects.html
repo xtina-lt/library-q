@@ -21,7 +21,7 @@
     <a href="{{i.url}}" target="#">Interactive Site</a>
     <br>
     {%endif%}
-    <form class="like_form"  method="POST">
+    <form class="like_form" method="POST">
         <input type="hidden" name="like_id" value="{{i.like['id']}}">
         <input type="submit" class="small_submit like_count" value="🤍 {{i.like['count']}}">
     </form>
