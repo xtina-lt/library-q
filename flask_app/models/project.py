@@ -25,7 +25,7 @@ class Project:
     
     @classmethod
     def select_all_json(cls):
-        query="SELECT *, count(users_likes.user_id) AS likes_count FROM projects JOIN likes ON likes.id = projects.like_id LEFT JOIN users_likes ON users_likes.like_id = likes.id GROUP BY likes.id"
+        query="SELECT *, count(users_likes.user_id) AS likes_count FROM projects JOIN likes ON likes.id = projects.like_id LEFT JOIN users_likes ON users_likes.like_id = likes.id GROUP BY projects.name"
         results = connectToMySQL(cls.db).query_db(query)
         x=[]
         for i in results:
@@ -43,7 +43,7 @@ class Project:
     
     @classmethod
     def select_all(cls):
-        query="SELECT *, count(users_likes.user_id) AS likes_count FROM projects JOIN likes ON likes.id = projects.like_id LEFT JOIN users_likes ON users_likes.like_id = likes.id GROUP BY likes.id"
+        query="SELECT *, count(users_likes.user_id) AS likes_count FROM projects JOIN likes ON likes.id = projects.like_id LEFT JOIN users_likes ON users_likes.like_id = likes.id GROUP BY projects.name"
         results = connectToMySQL(cls.db).query_db(query)
         x=[]
         for i in results:
