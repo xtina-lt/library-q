@@ -11,7 +11,7 @@ def select_all_projects():
     return render_template("projects.html", output = results)
 
 '''CREATE PROJECT'''
-'''@app.route("/projects/fetch")
+@app.route("/projects/fetch")
 def select_projects_py():
     db_projects = Project.select_all_json()
     db_values= [v for d in db_projects for v in d.values()]
@@ -33,7 +33,7 @@ def select_projects_py():
                 "url" : i["homepage"],
             }
             results.append(data)
-    return render_template("projects_pyfetch.html", output = results)'''
+    return render_template("projects_pyfetch.html", output = results)
 
 @app.route("/project/create", methods=["POST"])
 def project_create():
