@@ -34,6 +34,7 @@ for(let i = 0; i < like_form.length; i++){
         fetch("/like/form", { method :'POST', body : form})
             .then( response => response.json() )
             .then( data => {
+                console.log(data)
                 if (data['stars']){
                     console.log(data)
                     console.log(data['stars'])

@@ -26,6 +26,8 @@ html{
         text-align: center;
         font-size: 2vh;
         color: rgb(0, 0, 0, 0.6);
+        overflow-y: scroll;
+        scrollbar-width: none;
 
     }
         nav, footer{
@@ -226,7 +228,7 @@ ul > li{
 
 /* SCROLLBARS */
  /* Chrome, Safari and Opera */
-html::-webkit-scrollbar, main::-webkit-scrollbar, main > div::-webkit-scrollbar, main > div > div::-webkit-scrollbar{
+html::-webkit-scrollbar, body::-webkit-scrollbar, main::-webkit-scrollbar, main > div::-webkit-scrollbar, main > div > div::-webkit-scrollbar{
     display: none;
 }
     /* IE */
