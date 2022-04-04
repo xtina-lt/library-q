@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, render_template, request, redirect, session, jsonify
+from flask import Flask, render_template, request, redirect, session
 from flask_app import app
 from flask_app.models.project import Project
 from flask_app.models.like import Like
